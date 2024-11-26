@@ -73,6 +73,13 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch_Lecture"],
     }),
+
+    getLectureById: builder.query({
+      query: (lectureId) => ({
+        url: `/lecture/${lectureId}`,
+        method: "GET",
+      }),
+    }),
   }),
 });
 
@@ -84,4 +91,14 @@ export const {
   useCreateLectureMutation,
   useEditLectureMutation,
   useRemoveLectureMutation,
+  useGetLectureByIdQuery,
 } = courseApi;
+
+// WEBHOOK_ENDPOINT_SECRET=
+// API_KEY=451755216331547
+// API_SECRET=9mOAjmNmw_14ClmmQSVQCnPSx3s
+// CLOUD_NAME=dgolytiri
+// CLOUDINARY_URL=cloudinary://451755216331547:9mOAjmNmw_14ClmmQSVQCnPSx3s@dgolytiri
+// MONGO_URI=mongodb://localhost:27017/Threads
+// JWT_SECRET=fiywer87rc32rf382
+// PORT=8000
