@@ -17,6 +17,7 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch-Creator-Course"],
     }),
+
     getCreatorCourse: builder.query({
       query: () => ({
         url: "",
@@ -24,6 +25,7 @@ export const courseApi = createApi({
       }),
       providesTags: ["Refetch-Creator-Course"],
     }),
+
     editCourse: builder.mutation({
       query: ({ formData, courseId }) => ({
         url: `/${courseId}`,
@@ -32,12 +34,14 @@ export const courseApi = createApi({
       }),
       invalidatesTags: ["Refetch-Creator-Course"],
     }),
+
     getCourseById: builder.query({
       query: (courseId) => ({
         url: `/${courseId}`,
         method: "GET",
       }),
     }),
+
     createLecture: builder.mutation({
       query: ({
         lectureTitle,
@@ -80,11 +84,26 @@ export const courseApi = createApi({
         method: "GET",
       }),
     }),
+
+    publishCourse: builder.mutation({
+      query: ({ courseId, query }) => ({
+        url: `/${courseId}?publish=${query}`,
+        method: "PATCH",
+      }),
+    }),
+
+    getPublishedCourse: builder.query({
+      query: () => ({
+        url: "published-courses",
+        method: "GET",
+      }),
+    }),
   }),
 });
 
 export const {
   useCreateCourseMutation,
+  useGetPublishedCourseQuery,
   useGetCreatorCourseQuery,
   useEditCourseMutation,
   useGetCourseByIdQuery,
@@ -92,13 +111,5 @@ export const {
   useEditLectureMutation,
   useRemoveLectureMutation,
   useGetLectureByIdQuery,
+  usePublishCourseMutation,
 } = courseApi;
-
-// WEBHOOK_ENDPOINT_SECRET=
-// API_KEY=451755216331547
-// API_SECRET=9mOAjmNmw_14ClmmQSVQCnPSx3s
-// CLOUD_NAME=dgolytiri
-// CLOUDINARY_URL=cloudinary://451755216331547:9mOAjmNmw_14ClmmQSVQCnPSx3s@dgolytiri
-// MONGO_URI=mongodb://localhost:27017/Threads
-// JWT_SECRET=fiywer87rc32rf382
-// PORT=8000

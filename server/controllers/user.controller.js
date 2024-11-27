@@ -1,4 +1,5 @@
 import { User } from "../models/user.model.js";
+import { Course } from "../models/course.model.js";
 import bcrypt from "bcryptjs";
 import { generateToken } from "../utils/generateToken.js";
 import { deleteMediaFromCloudinary, uploadMedia } from "../utils/cloudinary.js";
@@ -145,6 +146,37 @@ export const updateProfile = async (req, res) => {
     return res.status(500).json({
       success: false,
       message: "Failed to update profile",
+    });
+  }
+};
+
+export const getLectureById = async (req, res) => {
+  try {
+  } catch (error) {
+    res.status(200).json({
+      message: "error fetching lecture by id.",
+    });
+  }
+};
+
+export const togglePublishCourse = async (req, res) => {
+  try {
+    const { courseId } = req.params;
+    const { publish } = req.query; //true,false
+    const course = await Course.findById(courseId);
+    if (!course) {
+      return res.status(404).json({
+        message: "course not found",
+      });
+    }
+    //publish status based on query params
+    course.isPublished = publish === "true";
+    await course.save();
+    const statusMessage = course.isPublished ? "Published" : "UnPublished";
+    return res.status(200).json({ message: `course is ${statusMessage}` });
+  } catch (error) {
+    res.status(200).json({
+      message: "Failed to update status -> error in publish & unpublish.",
     });
   }
 };
