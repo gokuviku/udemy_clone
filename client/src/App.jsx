@@ -21,6 +21,10 @@ import Dashboard from "./pages/admin/Dashboard";
 import AddCourse from "./pages/admin/course/AddCourse";
 import EditCourse from "./pages/admin/course/EditCourse";
 import CreateLecture from "./pages/admin/lecture/CreateLecture";
+import SearchPage from "./pages/student/SearchPage";
+import CourseDetail from "./pages/student/CourseDetail";
+import CourseProgress from "./pages/student/CourseProgress";
+import EditLecture from "./pages/admin/lecture/EditLecture";
 
 const appRouter = createBrowserRouter([
   {
@@ -60,32 +64,32 @@ const appRouter = createBrowserRouter([
           </ProtectedRoute>
         ),
       },
-      // {
-      //   path: "course/search",
-      //   element: (
-      //     <ProtectedRoute>
-      //       <SearchPage />
-      //     </ProtectedRoute>
-      //   ),
-      // },
-      // {
-      //   path: "course-detail/:courseId",
-      //   element: (
-      //     <ProtectedRoute>
-      //       <CourseDetail />
-      //     </ProtectedRoute>
-      //   ),
-      // },
-      // {
-      //   path: "course-progress/:courseId",
-      //   element: (
-      //     <ProtectedRoute>
-      //       <PurchaseCourseProtectedRoute>
-      //         <CourseProgress />
-      //       </PurchaseCourseProtectedRoute>
-      //     </ProtectedRoute>
-      //   ),
-      // },
+      {
+        path: "course/search",
+        element: (
+          <ProtectedRoute>
+            <SearchPage />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "course-detail/:courseId",
+        element: (
+          <ProtectedRoute>
+            <CourseDetail />
+          </ProtectedRoute>
+        ),
+      },
+      {
+        path: "course-progress/:courseId",
+        element: (
+          <ProtectedRoute>
+            <PurchaseCourseProtectedRoute>
+              <CourseProgress />
+            </PurchaseCourseProtectedRoute>
+          </ProtectedRoute>
+        ),
+      },
 
       // // admin routes start from here
       {

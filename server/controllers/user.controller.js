@@ -38,6 +38,8 @@ export const register = async (req, res) => {
     });
   }
 };
+// user.controller.js
+
 export const login = async (req, res) => {
   try {
     const { email, password } = req.body;
@@ -63,13 +65,14 @@ export const login = async (req, res) => {
     }
     generateToken(res, user, `Welcome back ${user.name}`);
   } catch (error) {
-    console.log(error);
+    console.error("Login error: ", error); // Improve logging
     return res.status(500).json({
       success: false,
       message: "Failed to login",
     });
   }
 };
+
 export const logout = async (_, res) => {
   try {
     return res.status(200).cookie("token", "", { maxAge: 0 }).json({

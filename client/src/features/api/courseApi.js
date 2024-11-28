@@ -1,6 +1,6 @@
 import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react";
 
-const COURSE_API = "http://localhost:8080/api/v1/course";
+const COURSE_API = "http://localhost:8000/api/v1/course";
 export const courseApi = createApi({
   reducerPath: "courseApi",
   tagTypes: ["Refetch-Creator-Course", "Refetch_Lecture"],
@@ -16,6 +16,28 @@ export const courseApi = createApi({
         body: { courseTitle, category },
       }),
       invalidatesTags: ["Refetch-Creator-Course"],
+    }),
+    getSearchCourse: builder.query({
+      query: ({ searchQuery, categories, sortByPrice }) => {
+        // Build qiery string
+        let queryString = `/search?query=${encodeURIComponent(searchQuery)}`;
+
+        // append cateogry
+        if (categories && categories.length > 0) {
+          const categoriesString = categories.map(encodeURIComponent).join(",");
+          queryString += `&categories=${categoriesString}`;
+        }
+
+        // Append sortByPrice is available
+        if (sortByPrice) {
+          queryString += `&sortByPrice=${encodeURIComponent(sortByPrice)}`;
+        }
+
+        return {
+          url: queryString,
+          method: "GET",
+        };
+      },
     }),
 
     getCreatorCourse: builder.query({
@@ -55,7 +77,13 @@ export const courseApi = createApi({
         body: { lectureTitle, videoInfo, isPreviewFree },
       }),
     }),
-
+    getCourseLecture: builder.query({
+      query: (courseId) => ({
+        url: `/${courseId}/lecture`,
+        method: "GET",
+      }),
+      providesTags: ["Refetch_Lecture"],
+    }),
     editLecture: builder.mutation({
       query: ({
         lectureTitle,
@@ -112,4 +140,6 @@ export const {
   useRemoveLectureMutation,
   useGetLectureByIdQuery,
   usePublishCourseMutation,
+  useGetCourseLectureQuery,
+  useGetSearchCourseQuery,
 } = courseApi;

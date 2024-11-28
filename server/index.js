@@ -36,17 +36,3 @@ app.use("/api/v1/courseProgress", courseProgressRoute);
 app.listen(PORT, () => {
   console.log(`Server listen at port ${PORT}`);
 });
-
-// WEBHOOK_ENDPOINT_SECRET=
-// API_KEY=451755216331547
-// API_SECRET=9mOAjmNmw_14ClmmQSVQCnPSx3s
-
-// CLOUD_NAME=dgolytiri
-// CLOUDINARY_URL=cloudinary://451755216331547:9mOAjmNmw_14ClmmQSVQCnPSx3s@dgolytiri
-
-// MONGO_URI=mongodb://localhost:27017/Threads
-// JWT_SECRET=fiywer87rc32rf382
-// PORT=8000
-
-// RAZORPAY_KEY_ID =
-// RAZORPAY_KEY_SECRET =
